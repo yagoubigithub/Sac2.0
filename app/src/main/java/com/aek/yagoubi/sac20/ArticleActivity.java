@@ -1,11 +1,13 @@
 package com.aek.yagoubi.sac20;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -108,7 +110,7 @@ public class ArticleActivity extends AppCompatActivity {
                     Intent intent1 = new Intent(ArticleActivity.this, getPictureActivity.class);
 
 
-                    startActivityForResult(intent1,1);
+                    startActivityForResult(intent1,2);
                 }
             });
 
@@ -120,6 +122,18 @@ public class ArticleActivity extends AppCompatActivity {
                 }
             });
 
+
+
+            see_galerie_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent1 = new Intent(ArticleActivity.this, GalleryActivity.class);
+
+                    intent1.putExtra("article_id",article_id);
+
+                    startActivity(intent1);
+                }
+            });
 
             delete_article_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -195,7 +209,7 @@ public class ArticleActivity extends AppCompatActivity {
 
         try {
             int PrixInteger = Integer.parseInt(prix);
-            boolean b = database.updateArticleInformation(id, name,type,  codebare,codebareFormat,  PrixInteger);
+            boolean b = database.updateArticleInformation(id, name,type,  codebare,codebareFormat,  PrixInteger, fileNamesArrayList);
             return b;
         }catch (NumberFormatException e){
 
@@ -207,14 +221,17 @@ public class ArticleActivity extends AppCompatActivity {
 
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (requestCode == 1) {
+        if (requestCode == 2) {
+            if (resultCode == Activity.RESULT_OK) {
 
-            String[] fileNamesArray =  intent.getStringExtra("fileNames").split(",");
-            fileNamesArrayList.clear();
-            for (int i = 0;i <fileNamesArray.length;i++){
-                if(!fileNamesArray[i].equals(""))
-                    fileNamesArrayList.add(fileNamesArray[i]);
+                String[] fileNamesArray = intent.getStringExtra("fileNames").split(",");
+                fileNamesArrayList.clear();
+                for (int i = 0; i < fileNamesArray.length; i++) {
+                    if (!fileNamesArray[i].equals(""))
+                        fileNamesArrayList.add(fileNamesArray[i]);
+                }
             }
+
         }else{
             IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
             if (scanningResult != null) {
@@ -234,5 +251,12 @@ public class ArticleActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+
+        isSave = false;
+        return super.onKeyUp(keyCode, event);
     }
 }

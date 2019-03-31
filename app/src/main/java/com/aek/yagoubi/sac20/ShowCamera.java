@@ -62,7 +62,7 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
 
 
 
-        Toast.makeText(mcontext,"width :" + mSize.width + " ,height : "+ mSize.height,Toast.LENGTH_LONG).show();
+
       params.setPictureSize(mSize.width,mSize.height);
         camera.setParameters(params);
 

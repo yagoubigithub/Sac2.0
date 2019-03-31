@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    >
+    <LinearLayout
+        android:id="@+id/mySacItemLinearLyout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:padding="4dp"
+        android:background="?android:attr/selectableItemBackground"
+
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/list_item_article_nom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Article"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                />
+
+            <TextView
+
+                android:id="@+id/list_item_nom_client_demande"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:text="Nom de Client  : abdou"
+
+
+                />
+
+            <TextView
+
+                android:id="@+id/list_item_article_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type  : Pc"
+
+                />
+            <TextView
+
+                android:id="@+id/list_item_article_prix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prix  : 50 $"
+
+                />
+            <TextView
+                android:id="@+id/list_item_article_qte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quantité : 2"
+                />
+
+
+
+
+            <TextView
+                android:id="@+id/list_item_article_prix_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prix Totale : 100 $"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:padding="2dp"
+                android:background="@android:color/holo_orange_light"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            >
+
+            <CheckBox
+                android:id="@+id/list_item_paye_Checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Payé"
+                />
+            <CheckBox
+                android:id="@+id/list_item_livre_Checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Livré"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

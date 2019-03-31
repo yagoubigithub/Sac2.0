@@ -45,25 +45,11 @@
             android:layout_marginRight="8dp"
             android:gravity="right|center_vertical">
 
-            <android.support.design.widget.FloatingActionButton
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/list_item_btn_maps"
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="10dp"
-                app:backgroundTint="@color/colorAccent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_call_white"
-                />
-
-            <android.support.design.widget.FloatingActionButton
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/list_item_btn_call"
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="10dp"
-                app:backgroundTint="@color/colorPrimary"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_call_white"
-                />
+           <RadioButton
+               android:id="@+id/radioButton_1"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Selectionner"/>
         </LinearLayout>
     </LinearLayout>
 

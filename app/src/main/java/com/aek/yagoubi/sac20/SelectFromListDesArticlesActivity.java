@@ -14,15 +14,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.aek.yagoubi.sac20.Adapters.ArticleAdapter;
-import com.aek.yagoubi.sac20.Adapters.ClientAdapter;
+import com.aek.yagoubi.sac20.Adapters.SelectArticleAdapter;
 import com.aek.yagoubi.sac20.Object.Article;
-import com.aek.yagoubi.sac20.Object.Client;
 
 import java.util.ArrayList;
 
-public class ListDesArticlesActivity extends AppCompatActivity {
+public class SelectFromListDesArticlesActivity extends AppCompatActivity {
     ListView list_view_articles_in_ListDesArticlesActivity;
-    ArticleAdapter adapter;
+    SelectArticleAdapter adapter;
     ArrayList<Article> articles;
     Database database;
     CheckBox see_all_checkbox;
@@ -34,6 +33,7 @@ public class ListDesArticlesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_des_articles);
 
+
         see_all_checkbox = (CheckBox) findViewById(R.id.see_all_checkbox);
         serch_input_list_des_articles = (EditText) findViewById(R.id.serch_input_list_des_articles);
 
@@ -44,7 +44,7 @@ public class ListDesArticlesActivity extends AppCompatActivity {
         list_view_articles_in_ListDesArticlesActivity = (ListView) findViewById(R.id.list_view_articles_in_ListDesArticlesActivity);
         showAjouterArticleBtn = (FloatingActionButton) findViewById(R.id.showAjouterArticleBtn);
 
-        adapter = new ArticleAdapter(this, articles);
+        adapter = new SelectArticleAdapter(this, articles);
 
         list_view_articles_in_ListDesArticlesActivity.setAdapter(adapter);
 
@@ -68,7 +68,7 @@ public class ListDesArticlesActivity extends AppCompatActivity {
                 ArrayList<Article> newArraySearch = new ArrayList<>();
 
                 if (s == null || s.length() == 0) {
-                    adapter = new ArticleAdapter(ListDesArticlesActivity.this, articles);
+                    adapter = new SelectArticleAdapter(SelectFromListDesArticlesActivity.this, articles);
                 } else {
                     see_all_checkbox.setChecked(false);
                     for (Article a : articles) {
@@ -78,7 +78,7 @@ public class ListDesArticlesActivity extends AppCompatActivity {
                             newArraySearch.add(a);
                         }
                     }
-                    adapter = new ArticleAdapter(ListDesArticlesActivity.this, newArraySearch);
+                    adapter = new SelectArticleAdapter(SelectFromListDesArticlesActivity.this, newArraySearch);
                 }
                 adapter.notifyDataSetChanged();
                 list_view_articles_in_ListDesArticlesActivity.setAdapter(adapter);
@@ -93,20 +93,19 @@ public class ListDesArticlesActivity extends AppCompatActivity {
         showAjouterArticleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ListDesArticlesActivity.this, AjouterArticleActivity.class);
+                Intent intent = new Intent(SelectFromListDesArticlesActivity.this, AjouterArticleActivity.class);
                 startActivity(intent);
             }
         });
 
-
-
     }
+
 
     private void seeAll() {
 
         list_view_articles_in_ListDesArticlesActivity = (ListView) findViewById(R.id.list_view_articles_in_ListDesArticlesActivity);
 
-        adapter = new ArticleAdapter(this, articles);
+        adapter = new SelectArticleAdapter(this, articles);
 
         list_view_articles_in_ListDesArticlesActivity.setAdapter(adapter);
 
@@ -115,7 +114,6 @@ public class ListDesArticlesActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        articles = database.getAllArticles();
         seeAll();
         super.onResume();
     }

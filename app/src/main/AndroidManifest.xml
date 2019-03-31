@@ -56,7 +56,12 @@
         <activity android:name=".ListDesClientActivity" />
         <activity android:name=".ClientActivity" />
         <activity android:name=".ArticleActivity" />
-        <activity android:name=".GalleryActivity"></activity>
+        <activity android:name=".GalleryActivity" />
+        <activity android:name=".FullImageGalleryActivity" />
+        <activity android:name=".AjouterDemandeActivity" />
+        <activity android:name=".SelectFromListDesArticlesActivity" />
+        <activity android:name=".SelectFromListDesClientActivity" />
+        <activity android:name=".ListDesDemandesActivity"></activity>
     </application>
 
 </manifest>

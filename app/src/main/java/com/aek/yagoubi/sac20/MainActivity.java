@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    LinearLayout btn_list_des_articles,ajouter_articles_btn,btn_ajouter_client,btn_list_des_clients;
+    LinearLayout btn_list_des_articles,ajouter_articles_btn,btn_ajouter_client,btn_list_des_clients,ajouter_demandes_btn,btn_list_des_demandes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,5 +56,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        ajouter_demandes_btn = (LinearLayout) findViewById(R.id.ajouter_demandes_btn);
+
+        ajouter_demandes_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,AjouterDemandeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //btn_list_des_demandes
+
+        btn_list_des_demandes = (LinearLayout) findViewById(R.id.btn_list_des_demandes);
+
+        btn_list_des_demandes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,ListDesDemandesActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

@@ -31,7 +31,7 @@ public class Database extends SQLiteOpenHelper {
 
 
         db.execSQL("create table  demande (ID INTEGER PRIMARY KEY AUTOINCREMENT , " +
-                "id_client INTEGER, id_article INTEGER  , description TEXT,  qte INTEGER, Paiement INTEGER,livre INTEGER)");
+                "id_client INTEGER,id_client_final INTEGER, id_article INTEGER  , description TEXT,  qte INTEGER, Paiement INTEGER,livre INTEGER)");
 
 
         db.execSQL("create table  images (id INTEGER PRIMARY KEY AUTOINCREMENT , id_article INTEGER," +
@@ -67,7 +67,7 @@ public class Database extends SQLiteOpenHelper {
             for (int i = 0;i < images.size();i++){
                 ContentValues newContent = new ContentValues();
 
-                newContent.put("ID_ARTICLE",result);
+                newContent.put("id_article",result);
                 newContent.put("filename",images.get(i));
 
                 db.insert("images",null,newContent);
@@ -161,14 +161,13 @@ public class Database extends SQLiteOpenHelper {
 
 
     }
-    public ArrayList<String> getImagesByArticleId(int article_id){
+    public ArrayList<String> getImagesByArticleId(int id_article){
         SQLiteDatabase db = this.getWritableDatabase();
+
         ArrayList<String> images = new ArrayList<>();
-        Cursor res  = db.rawQuery("SELECT * FROM images WHERE id_article="+article_id,null);
+       Cursor res  = db.rawQuery("SELECT filename FROM images WHERE id_article="+id_article,null);
         while (res.moveToNext()) {
-            images.add(res.getString(2));
-
-
+            images.add(res.getString(0));
         }
         return images;
     }
@@ -194,6 +193,8 @@ public class Database extends SQLiteOpenHelper {
     }
 
     public Article getArticle(int id){
+        if (id == -1 )
+            return null;
         SQLiteDatabase db = this.getWritableDatabase();
         Article article = null;
         Cursor res  = db.rawQuery("SELECT * FROM article WHERE id=" + id,null);
@@ -206,7 +207,7 @@ public class Database extends SQLiteOpenHelper {
         return article;
     }
 
-    public boolean updateArticleInformation(int id, String name, String type, String codebare, String codebareFormat, int prix){
+    public boolean updateArticleInformation(int id, String name, String type, String codebare, String codebareFormat, int prix, ArrayList<String> fileNames){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -216,8 +217,43 @@ public class Database extends SQLiteOpenHelper {
         cv.put("codebare", codebare);
         cv.put("codeBareFormat", codebareFormat);
         cv.put("prix", prix);
-        return db.update("article", cv, "id="+id, null) > 0;
 
+        long result  = db.update("article", cv, "id="+id, null);
+        if (result > 0){
+            for (int i = 0;i< fileNames.size() ;i++){
+                String filename = fileNames.get(i);
+                ContentValues newContent = new ContentValues();
+
+                newContent.put("id_article",id);
+                newContent.put("filename",filename);
+
+                db.insert("images",null,newContent);
+            }
+        }
+        return result > 0;
+
+
+    }
+
+
+    public boolean AjouterDemande(int id_client,int id_client_finale,int id_article,String description,int qte,int paiement_int){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("id_client",id_client);
+        contentValues.put("id_client_final",id_client_finale);
+        contentValues.put("id_article",id_article);
+        contentValues.put("description",description);
+        contentValues.put("qte",qte);
+        contentValues.put("Paiement",paiement_int);
+        contentValues.put("livre",0);
+
+
+
+
+        long result =  db.insert("demande",null,contentValues);
+
+        return  result != -1;
 
     }
 }

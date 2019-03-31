@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
 
-        tools:context=".ListDesDemande">
+        tools:context=".ListDesArticles">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,8 +64,15 @@
                 android:background="#FFF"
                 android:padding="4dp"
                 android:layout_margin="4dp"
-                android:hint="Nom" />
-
+                android:hint="Nom du la Article" />
+            <EditText
+                android:id="@+id/serch_input_by_client_name_list_des_articles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFF"
+                android:padding="4dp"
+                android:layout_margin="4dp"
+                android:hint="Nom du Client" />
         </LinearLayout>
 
         <ListView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -86,7 +93,7 @@
         android:layout_gravity="top|right"
         android:src="@drawable/ic_add_white"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="147dp"
         />
 
 
