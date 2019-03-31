@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="#FFF"
+    >
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/colorPrimaryDark"
+            android:paddingTop="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_marginBottom="25dp">
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/edit_text_serch_client_by_name"
+                android:layout_height="wrap_content"
+                android:background="#FFF"
+                android:padding="4dp"
+
+                android:hint="Nom"/>
+        </LinearLayout>
+
+
+
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/list_view_clients"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="1sp"
+            android:background="#FFF"
+            android:padding="5dp"
+            ></ListView>
+
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/showAjouterClientBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right"
+        android:src="@drawable/ic_add_white"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="55dp"
+        />
+
+</FrameLayout>

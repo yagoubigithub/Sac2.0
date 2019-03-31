@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ArticleActivity"
+    android:background="#111"
+    android:paddingTop="15dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_close_red"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:text="Modifier le Nom :"
+            />
+
+        <EditText
+            android:id="@+id/edit_text_change_article_name"
+            android:layout_width="match_parent"
+            android:text="Article ..."
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:background="#333"
+            android:padding="3dp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:padding="5dp"
+            android:text="Modifier le Type:"
+
+            android:layout_gravity="left|center_vertical"
+            />
+
+        <EditText
+            android:id="@+id/edit_text_change_article_type"
+
+            android:layout_width="match_parent"
+            android:text="145"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:background="#333"
+            android:padding="3dp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:padding="5dp"
+            android:text="Modifier le Prix :"
+
+            android:layout_gravity="left|center_vertical"
+            />
+
+        <EditText
+            android:id="@+id/edit_text_change_article_prix"
+
+            android:layout_width="match_parent"
+            android:text="145"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:background="#333"
+            android:padding="3dp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        >
+
+        <TextView
+            android:id="@+id/text_view_change_article_codebare"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:text="ASDSDFS551DDDDCEDED"
+            android:layout_gravity="left|center_vertical"
+            />
+
+        <Button
+
+            android:id="@+id/change_codebare_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#50D30D"
+            android:padding="15dp"
+
+            android:textColor="#FFF"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="right|center_vertical"
+            android:text="Modifier Code Bare"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        >
+        <ImageButton
+            android:id="@+id/change_pictures_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_local_see_white"
+
+            android:paddingRight="23dp"
+            android:paddingLeft="23dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@color/colorPrimaryDark"/>
+
+
+        <Button
+
+            android:id="@+id/see_galerie_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="#FFF"
+            android:layout_marginLeft="15dp"
+
+            android:text="Galerie"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/delete_article_btn"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            app:backgroundTint="@color/colorDanger"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_delete_white"
+            android:layout_margin="15dp"
+            />
+
+        <android.support.design.widget.FloatingActionButton
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/save_the_change_article"
+            android:layout_margin="15dp"
+            android:layout_width="wrap_content"
+            app:backgroundTint="@color/design_default_color_primary"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_save_white"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
