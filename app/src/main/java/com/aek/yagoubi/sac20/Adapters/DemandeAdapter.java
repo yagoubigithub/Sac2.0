@@ -1,7 +1,9 @@
 package com.aek.yagoubi.sac20.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aek.yagoubi.sac20.ArticleActivity;
 import com.aek.yagoubi.sac20.Database;
+import com.aek.yagoubi.sac20.DemandeActivity;
 import com.aek.yagoubi.sac20.Object.Article;
 import com.aek.yagoubi.sac20.Object.Client;
 import com.aek.yagoubi.sac20.Object.Demande;
@@ -86,8 +90,16 @@ public class DemandeAdapter extends ArrayAdapter<Demande> {
 
 
 
+        list_item_demande_article_nom.setPaintFlags(list_item_demande_article_nom.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
 
-
+        list_item_demande_article_nom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext,ArticleActivity.class);
+                intent.putExtra("article_id",demande.getId_article());
+                mContext.startActivity(intent);
+            }
+        });
 
         showContentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +119,9 @@ public class DemandeAdapter extends ArrayAdapter<Demande> {
         mySacItemLinearLyout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "lin", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, DemandeActivity.class);
+                intent.putExtra("demande_id",demande.getId());
+                mContext.startActivity(intent);
             }
         });
         boolean isLivre = database.isLivre(demande.getId());

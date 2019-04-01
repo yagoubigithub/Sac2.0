@@ -1,10 +1,13 @@
 package com.aek.yagoubi.sac20;
 
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -26,6 +29,7 @@ public class ListDesDemandesActivity extends AppCompatActivity {
     DemandeAdapter adapter;
     CheckBox see_all_checkbox,see_livre_checkbox,see_payee_checkbox;
     EditText serch_input_list_des_demandes,serch_input_by_client_name_list_des_demandes;
+    FloatingActionButton showAjouterDemandeBtn;
 
 
     @Override
@@ -36,7 +40,15 @@ public class ListDesDemandesActivity extends AppCompatActivity {
 
         list_view_demandes  = (ListView) findViewById(R.id.list_view_demandes);
 
+        showAjouterDemandeBtn = (FloatingActionButton) findViewById(R.id.showAjouterDemandeBtn);
 
+        showAjouterDemandeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListDesDemandesActivity.this,AjouterDemandeActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         database = new Database(this);

@@ -61,7 +61,8 @@
         <activity android:name=".AjouterDemandeActivity" />
         <activity android:name=".SelectFromListDesArticlesActivity" />
         <activity android:name=".SelectFromListDesClientActivity" />
-        <activity android:name=".ListDesDemandesActivity"></activity>
+        <activity android:name=".ListDesDemandesActivity" />
+        <activity android:name=".DemandeActivity"></activity>
     </application>
 
 </manifest>

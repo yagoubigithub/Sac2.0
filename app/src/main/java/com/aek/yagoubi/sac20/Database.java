@@ -255,22 +255,7 @@ public class Database extends SQLiteOpenHelper {
 
     }
 
-/*
-    public ArrayList<Demande> getAllDeamdes() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ArrayList<Demande> demandes = new ArrayList<>();
-        Cursor res = db.rawQuery("SELECT * FROM demande", null);
-        while (res.moveToNext()) {
-            demandes.add(new Demande(res.getInt(0), res.getInt(1), res.getInt(2),
-                    res.getInt(3), res.getString(4), res.getInt(5), res.getInt(6),
-                    res.getInt(7)
-            ));
 
-
-        }
-        return demandes;
-    }
-*/
 
     public ArrayList<Demande> getAllExtraDeamdes() {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -292,6 +277,31 @@ public class Database extends SQLiteOpenHelper {
 
         }
         return demandes;
+    }
+
+
+
+    public Demande getDemande(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Demande demande = null;
+        Cursor res = db.rawQuery("SELECT demande.id,demande.id_client,client.name as clinet_name, demande.id_client_final," +
+                " client.name as client_name_final,demande.id_article,article.name as article_name,demande.description," +
+                "demande.qte,demande.livre,demande.Paiement,article.prix,article.codebare,article.codeBareFormat  " +
+                "FROM demande " +
+                "JOIN article ON article.id = demande.id_article JOIN client ON client.id = demande.id_client WHERE demande.id="+id, null);
+        while (res.moveToNext()) {
+           demande = new Demande(res.getInt(0),res.getInt(1),res.getString(2),
+                    res.getInt(3),
+                    res.getString(4),res.getInt(5), res.getString(6), res.getString(7),
+                    res.getInt(8),res.getInt(9),res.getInt(10),res.getInt(11),
+                    res.getString(12),
+                    res.getString(13)
+
+            );
+
+
+        }
+        return demande;
     }
 
     public boolean isLivre(int id) {
@@ -326,5 +336,24 @@ public class Database extends SQLiteOpenHelper {
         }
 
 
+    }
+
+    public boolean UpdateDemande(int id,int id_client, int id_client_finale, int id_article, String description, int qte, int paiement_int) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("id_client", id_client);
+        contentValues.put("id_client_final", id_client_finale);
+        contentValues.put("id_article", id_article);
+        contentValues.put("description", description);
+        contentValues.put("qte", qte);
+        contentValues.put("Paiement", paiement_int);
+        contentValues.put("livre", 0);
+
+
+        long result = db.update("demande",contentValues, "id=" + id,null );
+
+        return result != -1;
     }
 }
