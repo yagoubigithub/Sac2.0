@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,7 +27,10 @@ public class AjouterDemandeActivity extends AppCompatActivity {
     TextView article_name_text_view, client_tetxView, client_finale_textView;
     EditText edit_text_save_article_qte, editText_paiement, editText_description;
     ImageView add_qte_imageView, remove_qte_imageView;
+    CheckBox pyeeCheckbox;
     int qte = 1;
+
+    boolean isPayee = false;
 
     int id_client, id_client_finale, id_article;
     String description;
@@ -41,6 +46,7 @@ public class AjouterDemandeActivity extends AppCompatActivity {
         select_article_btn = (Button) findViewById(R.id.select_article_btn);
         select_client_btn = (Button) findViewById(R.id.select_client_btn);
         select_client_finale_btn = (Button) findViewById(R.id.select_client_finale_btn);
+        pyeeCheckbox = (CheckBox) findViewById(R.id.pyeeCheckbox);
         article_name_text_view = (TextView) findViewById(R.id.article_name_text_view);
 
 
@@ -63,6 +69,14 @@ public class AjouterDemandeActivity extends AppCompatActivity {
                     qte--;
                     //setText
                     edit_text_save_article_qte.setText(qte + "");
+                    if (isPayee){
+                        if(article != null){
+                            int paiement = article.getPrix() * qte;
+
+                            editText_paiement.setText(paiement + "");
+
+                        }
+                    }
                 }
             }
         });
@@ -74,6 +88,15 @@ public class AjouterDemandeActivity extends AppCompatActivity {
                 qte++;
                 //setText
                 edit_text_save_article_qte.setText(qte + "");
+                if(isPayee){
+                    if(article != null){
+                        int paiement = article.getPrix() * qte;
+
+                        editText_paiement.setText(paiement + "");
+
+                    }
+                }
+
 
             }
         });
@@ -111,24 +134,67 @@ public class AjouterDemandeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                description = editText_description.getText().toString();
+
+                if (client == null) {
+                    Toast.makeText(AjouterDemandeActivity.this, "Sélectonner une client svp", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
+                if (client_final == null) {
+
+                    id_client_finale = id_client;
+                }
+
+                if (article == null) {
+                    Toast.makeText(AjouterDemandeActivity.this, "Sélectonner un Article svp", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 //saveTheChange
                 int paiement_int;
                 try {
 
                     paiement_int = Integer.parseInt(editText_paiement.getText().toString());
                 } catch (NumberFormatException e) {
-                    Toast.makeText(AjouterDemandeActivity.this, "paiement oit être un nombre svp", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AjouterDemandeActivity.this, "paiement doit être un nombre svp", Toast.LENGTH_LONG).show();
                     return;
                 }
 
 
                 boolean isSave = database.AjouterDemande(id_client, id_client_finale, id_article, description, qte, paiement_int);
                 if (isSave) {
+
                     Toast.makeText(AjouterDemandeActivity
-                            .this, "Demande enregistré avec succès", Toast.LENGTH_LONG).show();
+                            .this, "Demande enregistré avec succès : " + paiement_int, Toast.LENGTH_LONG).show();
                     finish();
+                } else {
+                    Toast.makeText(AjouterDemandeActivity
+                            .this, "Error", Toast.LENGTH_LONG).show();
                 }
 
+            }
+        });
+
+        pyeeCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+
+
+                    if(article != null){
+                        int paiement = article.getPrix() * qte;
+
+                        editText_paiement.setText(paiement + "");
+                        isPayee = true;
+                    }else{
+                        Toast.makeText(AjouterDemandeActivity.this, "Sélectonner un Article svp", Toast.LENGTH_LONG).show();
+                        pyeeCheckbox.setChecked(false);
+                        return;
+                    }
+                }else{
+                    editText_paiement.setText(0 + "");
+                }
             }
         });
 
@@ -167,7 +233,7 @@ public class AjouterDemandeActivity extends AppCompatActivity {
                     client_tetxView.setText("Client : " + client.getName());
                 }
             } catch (Exception e) {
-               e.printStackTrace();
+                e.printStackTrace();
             }
 
         }

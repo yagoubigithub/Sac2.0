@@ -48,7 +48,20 @@
                         />
 
                 </LinearLayout>
-
+                <CheckBox
+                    android:id="@+id/see_payee_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Payée"
+                    android:textColor="#FFF"
+                    />
+                <CheckBox
+                    android:id="@+id/see_livre_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Livré"
+                    android:textColor="#FFF"
+                    />
                 <CheckBox
                     android:id="@+id/see_all_checkbox"
                     android:layout_width="wrap_content"
@@ -56,9 +69,10 @@
                     android:text="Voir Tout"
                     android:textColor="#FFF"
                     />
+
             </LinearLayout>
             <EditText
-                android:id="@+id/serch_input_list_des_articles"
+                android:id="@+id/serch_input_list_des_demandes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFF"
@@ -66,7 +80,7 @@
                 android:layout_margin="4dp"
                 android:hint="Nom du la Article" />
             <EditText
-                android:id="@+id/serch_input_by_client_name_list_des_articles"
+                android:id="@+id/serch_input_by_client_name_list_des_demandes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFF"
@@ -76,7 +90,7 @@
         </LinearLayout>
 
         <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/list_view_articles_in_ListDesArticlesActivity"
+            android:id="@+id/list_view_demandes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#FFF"
