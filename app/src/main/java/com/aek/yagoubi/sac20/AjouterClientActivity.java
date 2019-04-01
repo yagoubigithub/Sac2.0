@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.aek.yagoubi.sac20.Object.Client;
@@ -34,14 +35,14 @@ public class AjouterClientActivity extends AppCompatActivity {
 
             init();
         }else{
-            Button mapbtn = (Button) findViewById(R.id.mapbtn);
+            ImageView mapbtn = (ImageView) findViewById(R.id.mapbtn);
             mapbtn.setVisibility(View.GONE);
         }
 
     }
     private void init() {
         database = new Database(this);
-        Button mapbtn = (Button) findViewById(R.id.mapbtn);
+        ImageView mapbtn = (ImageView) findViewById(R.id.mapbtn);
         mapbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

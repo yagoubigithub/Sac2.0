@@ -15,11 +15,15 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aek.yagoubi.sac20.Adapters.DemandeAdapter;
 import com.aek.yagoubi.sac20.Object.Client;
+import com.aek.yagoubi.sac20.Object.Demande;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
@@ -34,12 +38,19 @@ public class ClientActivity extends AppCompatActivity {
     Database database;
     String lat,lon;
     private static final int ERROR_DIALOG_REQUEST = 9001;
+    ListView list_view_demandes_in_clientActivity;
+    ArrayList<Demande> demandes;
+    DemandeAdapter adapter;
 
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client);
+
+
+        list_view_demandes_in_clientActivity = (ListView) findViewById(R.id.list_view_demandes_in_clientActivity);
+
 
 
         TextView text_view_modiefier_geo = (TextView) findViewById(R.id.text_view_modiefier_geo);
@@ -124,7 +135,7 @@ public class ClientActivity extends AppCompatActivity {
 
 
         //Delete client
-        FloatingActionButton delete_client_btn = (FloatingActionButton) findViewById(R.id.delete_client_btn);
+        ImageButton delete_client_btn = (ImageButton) findViewById(R.id.delete_client_btn);
 
         delete_client_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -228,6 +239,14 @@ public class ClientActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+        demandes = database.getAllExtraDeamdesByClientId(client_id);
+
+        adapter = new DemandeAdapter(this, demandes);
+
+        list_view_demandes_in_clientActivity.setAdapter(adapter);
+
 
 
     }

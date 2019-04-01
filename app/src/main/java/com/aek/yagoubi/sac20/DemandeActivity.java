@@ -1,5 +1,7 @@
 package com.aek.yagoubi.sac20;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +37,7 @@ public class DemandeActivity extends AppCompatActivity {
     int id_client, id_client_finale, id_article, demande_id;
     String description;
 
+    ImageButton delete_demande_btn;
     Demande demande;
 
     @Override
@@ -45,6 +49,8 @@ public class DemandeActivity extends AppCompatActivity {
         select_article_btn = (Button) findViewById(R.id.select_article_btn);
         select_client_btn = (Button) findViewById(R.id.select_client_btn);
         select_client_finale_btn = (Button) findViewById(R.id.select_client_finale_btn);
+
+
         pyeeCheckbox = (CheckBox) findViewById(R.id.pyeeCheckbox);
         article_name_text_view = (TextView) findViewById(R.id.article_name_text_view);
 
@@ -242,6 +248,38 @@ public class DemandeActivity extends AppCompatActivity {
             Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
             finish();
         }
+
+
+        delete_demande_btn = (ImageButton) findViewById(R.id.delete_demande_btn);
+
+        delete_demande_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(DemandeActivity.this);
+
+                builder.setMessage("Suprimer  " + client.getName() + " demande" )
+                        .setTitle("Suprimer");
+                builder.setPositiveButton("OUI", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        boolean b = database.deleteDemandeByHisId(demande.getId());
+                        if (b)
+                            finish();
+                        else
+                            Toast.makeText(DemandeActivity.this, "Error", Toast.LENGTH_LONG).show();
+                    }
+                });
+                builder.setNegativeButton("NON", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
 
     }
 

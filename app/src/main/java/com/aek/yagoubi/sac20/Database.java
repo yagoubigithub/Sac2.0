@@ -356,4 +356,37 @@ public class Database extends SQLiteOpenHelper {
 
         return result != -1;
     }
+
+
+
+    public ArrayList<Demande> getAllExtraDeamdesByClientId(int client_id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<Demande> demandes = new ArrayList<>();
+        Cursor res = db.rawQuery("SELECT demande.id,demande.id_client,client.name as clinet_name, demande.id_client_final," +
+                " client.name as client_name_final,demande.id_article,article.name as article_name,demande.description," +
+                "demande.qte,demande.livre,demande.Paiement,article.prix,article.codebare,article.codeBareFormat  " +
+                "FROM demande JOIN article ON article.id = demande.id_article JOIN client ON client.id = demande.id_client WHERE client.id="+client_id + " OR demande.id_client_final="+client_id, null);
+        while (res.moveToNext()) {
+            demandes.add(new Demande(res.getInt(0),res.getInt(1),res.getString(2),
+                    res.getInt(3),
+                    res.getString(4),res.getInt(5), res.getString(6), res.getString(7),
+                    res.getInt(8),res.getInt(9),res.getInt(10),res.getInt(11),
+                    res.getString(12),
+                    res.getString(13)
+
+            ));
+
+
+        }
+        return demandes;
+    }
+
+
+    public boolean deleteDemandeByHisId(int id) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        return  db.delete("demande", "id=?", new String[]{String.valueOf(id)}) > 0;
+
+
+    }
 }

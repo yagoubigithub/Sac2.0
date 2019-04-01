@@ -5,33 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
+    android:padding="8dp"
     tools:context=".AjouterClientActivity">
 
     <EditText
         android:id="@+id/input_ajouter_client_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginBottom="8dp"
         android:hint="Nome"/>
     <EditText
         android:id="@+id/input_ajouter_client_tele"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:inputType="number"
+        android:layout_marginBottom="8dp"
         android:hint="Numero telephone"/>
 
-    <Button
+    <ImageView
         android:id="@+id/mapbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+       android:src="@drawable/ic_location_darck"
+        android:layout_gravity="left"
+        android:layout_margin="15dp"
+        android:clickable="true"
+
+        />
 
     <Button
         android:id="@+id/save_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
-        android:text="Save"
+
+        android:background="@android:color/holo_blue_dark"
+        android:textColor="#FFF"
+        android:textStyle="bold"
+        android:text="Enregistrer"
 
         />
 </LinearLayout>

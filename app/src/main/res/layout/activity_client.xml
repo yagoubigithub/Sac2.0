@@ -108,13 +108,7 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <android.support.design.widget.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/delete_client_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_delete_white"
-            app:backgroundTint="@color/colorDanger" />
+
 
         <android.support.design.widget.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/map_client_btn"
@@ -125,13 +119,7 @@
             app:backgroundTint="@color/colorPrimaryDark" />
 
 
-        <android.support.design.widget.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/ajouter_article_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_add_shopping_cart"
-            app:backgroundTint="@color/design_default_color_primary" />
+
 
         <android.support.design.widget.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/call_client_btn"
@@ -140,7 +128,8 @@
             android:layout_margin="10dp"
             android:src="@drawable/ic_call_white"
             app:backgroundTint="@color/colorPrimary" />
-        <android.support.design.widget.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
+        <android.support.design.widget.FloatingActionButton
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/update_client_information"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -150,18 +139,19 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/total_prix"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:text="Totale  : 1484 $"
-        android:textColor="#FFF"
-        android:textSize="16sp"
-        android:textStyle="bold" />
 
-    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/list_view_articles_in_clientActivity"
+    <ImageButton
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/delete_client_btn"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_delete_white"
+        app:backgroundTint="@color/colorDanger" />
+
+    <ListView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/list_view_demandes_in_clientActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F2F2F2"

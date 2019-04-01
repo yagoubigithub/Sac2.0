@@ -186,7 +186,7 @@
             android:layout_height="180dp"
             android:layout_margin="8dp"
 
-            app:cardBackgroundColor="#FF4136"
+            app:cardBackgroundColor="@android:color/holo_blue_bright"
             android:id="@+id/btn_list_des_demandes_card"
             android:layout_weight="1">
 
@@ -203,13 +203,13 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
 
-                    android:src="@drawable/ic_local_grocery_store" />
+                    android:src="@drawable/ic_shopping_basket" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Liste des Articles"
+                    android:text="Liste des demandes"
                     android:layout_gravity="center"
                     android:textStyle="bold"
                     android:textColor="#FFF" />
@@ -222,8 +222,8 @@
             android:layout_width="0dp"
             android:layout_height="180dp"
             android:layout_margin="8dp"
-            android:backgroundTint="#FF851B"
-            app:cardBackgroundColor="#FF851B"
+            android:backgroundTint="@android:color/holo_green_dark"
+            app:cardBackgroundColor="@android:color/holo_green_dark"
             android:layout_weight="1">
 
             <LinearLayout
@@ -239,13 +239,13 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/ic_add_shopping_cart" />
+                    android:src="@drawable/ic_shopping_basket_add" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Ajouter un Article"
+                    android:text="Ajouter une Demande"
                     android:layout_gravity="center"
                     android:textColor="#FFF"
                     android:textStyle="bold"/>

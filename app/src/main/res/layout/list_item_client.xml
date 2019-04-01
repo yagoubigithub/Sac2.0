@@ -50,9 +50,10 @@
                 android:id="@+id/list_item_btn_maps"
                 android:layout_width="wrap_content"
                 android:layout_marginLeft="10dp"
-                app:backgroundTint="@color/colorAccent"
+
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_call_white"
+                android:src="@drawable/ic_location_search_white"
+                app:backgroundTint="@android:color/holo_blue_light"
                 />
 
             <android.support.design.widget.FloatingActionButton
