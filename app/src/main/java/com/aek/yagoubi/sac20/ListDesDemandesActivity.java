@@ -1,6 +1,7 @@
 package com.aek.yagoubi.sac20;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,29 +9,36 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.aek.yagoubi.sac20.Adapters.ArticleAdapter;
 import com.aek.yagoubi.sac20.Adapters.ClientAdapter;
 import com.aek.yagoubi.sac20.Adapters.DemandeAdapter;
+import com.aek.yagoubi.sac20.Object.Article;
 import com.aek.yagoubi.sac20.Object.Client;
 import com.aek.yagoubi.sac20.Object.Demande;
+import com.aek.yagoubi.sac20.com.google.zxing.integration.android.IntentIntegrator;
+import com.aek.yagoubi.sac20.com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
 
 public class ListDesDemandesActivity extends AppCompatActivity {
 
     ListView list_view_demandes;
+
     Database database;
     ArrayList<Demande> demandes;
     DemandeAdapter adapter;
-    CheckBox see_all_checkbox,see_livre_checkbox,see_payee_checkbox;
-    EditText serch_input_list_des_demandes,serch_input_by_client_name_list_des_demandes;
+    CheckBox see_all_checkbox, see_livre_checkbox, see_payee_checkbox;
+    EditText serch_input_list_des_demandes, serch_input_by_client_name_list_des_demandes;
     FloatingActionButton showAjouterDemandeBtn;
 
+    Button codeBareBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +46,16 @@ public class ListDesDemandesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_des_demandes);
 
 
-        list_view_demandes  = (ListView) findViewById(R.id.list_view_demandes);
+        list_view_demandes = (ListView) findViewById(R.id.list_view_demandes);
 
         showAjouterDemandeBtn = (FloatingActionButton) findViewById(R.id.showAjouterDemandeBtn);
 
         showAjouterDemandeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ListDesDemandesActivity.this,AjouterDemandeActivity.class);
+                Intent intent = new Intent(ListDesDemandesActivity.this, AjouterDemandeActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -54,19 +63,19 @@ public class ListDesDemandesActivity extends AppCompatActivity {
         database = new Database(this);
 
 
-         demandes = new ArrayList<>();
+        demandes = new ArrayList<>();
 
-         demandes = database.getAllExtraDeamdes();
-
-
-         adapter = new DemandeAdapter(this,demandes);
-         list_view_demandes.setAdapter(adapter);
+        demandes = database.getAllExtraDeamdes();
 
 
-         //EditText
+        adapter = new DemandeAdapter(this, demandes);
+        list_view_demandes.setAdapter(adapter);
 
-        serch_input_by_client_name_list_des_demandes  =(EditText) findViewById(R.id.serch_input_by_client_name_list_des_demandes);
-        serch_input_list_des_demandes  =(EditText) findViewById(R.id.serch_input_list_des_demandes);
+
+        //EditText
+
+        serch_input_by_client_name_list_des_demandes = (EditText) findViewById(R.id.serch_input_by_client_name_list_des_demandes);
+        serch_input_list_des_demandes = (EditText) findViewById(R.id.serch_input_list_des_demandes);
 
 
         serch_input_list_des_demandes.addTextChangedListener(new TextWatcher() {
@@ -109,23 +118,22 @@ public class ListDesDemandesActivity extends AppCompatActivity {
             }
         });
 
-         //checkboxs
+        //checkboxs
 
-        see_all_checkbox =(CheckBox) findViewById(R.id.see_all_checkbox);
+        see_all_checkbox = (CheckBox) findViewById(R.id.see_all_checkbox);
         see_livre_checkbox = (CheckBox) findViewById(R.id.see_livre_checkbox);
         see_payee_checkbox = (CheckBox) findViewById(R.id.see_payee_checkbox);
 
         see_all_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-
+                if (isChecked) {
+                    see_all_checkbox.setChecked(true);
                     see_livre_checkbox.setChecked(false);
                     see_payee_checkbox.setChecked(false);
-                    serch_input_list_des_demandes.setText("");
-                    serch_input_by_client_name_list_des_demandes.setText("");
 
-                 seeAll();
+
+                    seeAll();
 
                 }
             }
@@ -134,49 +142,19 @@ public class ListDesDemandesActivity extends AppCompatActivity {
         see_livre_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-             if(isChecked){
-                 see_payee_checkbox.setChecked(false);
-                 see_all_checkbox.setChecked(false);
-                 serch_input_list_des_demandes.setText("");
-                 serch_input_by_client_name_list_des_demandes.setText("");
-
-                 seeAll();
-                 ArrayList<Demande> newArraySearch = new ArrayList<>();
-                 newArraySearch.clear();
-                 for (Demande d : demandes) {
-                     if (d.getLivre() == 1) {
-
-
-                         newArraySearch.add(d);
-                     }
-                 }
-                 adapter = new DemandeAdapter(ListDesDemandesActivity.this, newArraySearch);
-                 adapter.notifyDataSetChanged();
-                 list_view_demandes.setAdapter(adapter);
-
-
-             }else{
-                 seeAll();
-             }
-            }
-        });
-
-        see_payee_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-
-                    see_livre_checkbox.setChecked(false);
+                if (isChecked) {
+                    see_payee_checkbox.setChecked(false);
+                    see_livre_checkbox.setChecked(true);
                     see_all_checkbox.setChecked(false);
-                    serch_input_list_des_demandes.setText("");
-                    serch_input_by_client_name_list_des_demandes.setText("");
 
+
+                    seeAll();
                     ArrayList<Demande> newArraySearch = new ArrayList<>();
                     newArraySearch.clear();
                     for (Demande d : demandes) {
+                        if (d.getLivre() == 1) {
 
-                        if (d.getPaiement() >= (d.getPrix() * d.getQte())) {
-                            Log.d("LisDesDemandeActivity", d.getPaiement() + "==="  + (d.getPrix() * d.getQte()));
+
                             newArraySearch.add(d);
                         }
                     }
@@ -185,16 +163,51 @@ public class ListDesDemandesActivity extends AppCompatActivity {
                     list_view_demandes.setAdapter(adapter);
 
 
-                }else{
+                } else {
                     seeAll();
                 }
             }
         });
 
+        see_payee_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    see_payee_checkbox.setChecked(true);
+
+                    see_livre_checkbox.setChecked(false);
+                    see_all_checkbox.setChecked(false);
 
 
+                    ArrayList<Demande> newArraySearch = new ArrayList<>();
+                    newArraySearch.clear();
+                    for (Demande d : demandes) {
+
+                        if (d.getPaiement() >= (d.getPrix() * d.getQte())) {
+                            Log.d("LisDesDemandeActivity", d.getPaiement() + "===" + (d.getPrix() * d.getQte()));
+                            newArraySearch.add(d);
+                        }
+                    }
+                    adapter = new DemandeAdapter(ListDesDemandesActivity.this, newArraySearch);
+                    adapter.notifyDataSetChanged();
+                    list_view_demandes.setAdapter(adapter);
 
 
+                } else {
+                    seeAll();
+                }
+            }
+        });
+
+        codeBareBtn = (Button) findViewById(R.id.codeBareBtn);
+
+        codeBareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentIntegrator scanIntegrator = new IntentIntegrator(ListDesDemandesActivity.this);
+                scanIntegrator.initiateScan();
+            }
+        });
 
 
     }
@@ -209,7 +222,7 @@ public class ListDesDemandesActivity extends AppCompatActivity {
         demandes = database.getAllExtraDeamdes();
 
 
-        adapter = new DemandeAdapter(this,demandes);
+        adapter = new DemandeAdapter(this, demandes);
         list_view_demandes.setAdapter(adapter);
     }
 
@@ -224,12 +237,13 @@ public class ListDesDemandesActivity extends AppCompatActivity {
         see_payee_checkbox.setChecked(false);
 
 
-        if (search_ariticle_name.equals("") &&  search_client_name.equals("")){
+        if (search_ariticle_name.equals("") && search_client_name.equals("")) {
             adapter = new DemandeAdapter(ListDesDemandesActivity.this, demandes);
-        }else{
+        } else {
+
             for (Demande d : demandes) {
-                if (d.getArticle_name().toUpperCase().contains(search_ariticle_name.toString().toUpperCase())  &&
-                        ( d.getClinet_name().toUpperCase().contains(search_client_name.toString().toUpperCase()) ||
+                if (d.getArticle_name().toUpperCase().contains(search_ariticle_name.toString().toUpperCase()) &&
+                        (d.getClinet_name().toUpperCase().contains(search_client_name.toString().toUpperCase()) ||
                                 d.getClient_name_final().toUpperCase().contains(search_client_name.toString().toUpperCase())
                         )) {
                     Log.i("Filter", d.getArticle_name());
@@ -245,9 +259,50 @@ public class ListDesDemandesActivity extends AppCompatActivity {
 
     }
 
+
+
     @Override
-    protected void onResume() {
-        seeAll();
-        super.onResume();
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+
+        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (scanningResult != null) {
+            String scanContent = scanningResult.getContents();
+            String scanFormat = scanningResult.getFormatName();
+            if (scanContent != null && scanFormat != null) {
+
+                searchWithCodeBare(scanContent, scanFormat);
+
+            }
+
+        } else {
+            Toast toast = Toast.makeText(this,
+                    "No scan data received!", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
+
+
+    private void searchWithCodeBare(String scanContent, String scanFormat) {
+        ArrayList<Demande> newArraySearch = new ArrayList<>();
+        list_view_demandes = (ListView) findViewById(R.id.list_view_demandes);
+        see_all_checkbox.setChecked(false);
+        see_livre_checkbox.setChecked(false);
+        see_payee_checkbox.setChecked(false);
+
+        serch_input_list_des_demandes.setText("");
+        serch_input_by_client_name_list_des_demandes.setText("");
+
+        for (Demande d : demandes) {
+            if (d.getCodebare().equals(scanContent) && d.getCodebareFormat().equals(scanFormat)) {
+                newArraySearch.add(d);
+            }
+        }
+
+        adapter = new DemandeAdapter(this, newArraySearch);
+
+        adapter.notifyDataSetChanged();
+        list_view_demandes.setAdapter(adapter);
+
     }
 }

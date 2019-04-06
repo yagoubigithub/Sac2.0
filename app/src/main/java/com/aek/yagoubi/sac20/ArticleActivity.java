@@ -171,15 +171,8 @@ public class ArticleActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     isSave =  saveTheChange(article_id);
                     if (isSave) {
-                        //refresh
-                        //refresh
-                        if (android.os.Build.VERSION.SDK_INT >= 11) {
 
-                            recreate();
-
-                        } else {
-                            finish();
-                        }
+                       finish();
 
 
 

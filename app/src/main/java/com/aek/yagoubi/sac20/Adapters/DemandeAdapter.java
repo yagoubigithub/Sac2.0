@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,7 +66,7 @@ public class DemandeAdapter extends ArrayAdapter<Demande> {
         final ImageView showContentBtn = (ImageView) listItemView.findViewById(R.id.showContentBtn);
         final ExpandableLinearLayout content = (ExpandableLinearLayout) listItemView.findViewById(R.id.content);
 
-        final CheckBox list_item_livre_Checkbox = (CheckBox) listItemView.findViewById(R.id.list_item_livre_Checkbox);
+        final RadioButton list_item_livre_Checkbox = (RadioButton) listItemView.findViewById(R.id.list_item_livre_Checkbox);
 
 
         list_item_demande_article_nom.setText(article.getName());
@@ -76,15 +77,16 @@ public class DemandeAdapter extends ArrayAdapter<Demande> {
         list_item_demande_qte.setText("Quantité :" + demande.getQte());
         list_item_demande_prix_total.setText("Prix Totale : " + (demande.getQte() * demande.getPrix()));
         list_item_demande_paiement.setText("Paiement  : " + demande.getPaiement());
-        if (demande.getDescription() != null)
+        if (demande.getDescription().length() >  0 )
             list_item_demande_description.setText("Descrription :" + demande.getDescription());
-
         else
             list_item_demande_description.setVisibility(View.GONE);
 
         LinearLayout mySacItemLinearLyout = (LinearLayout) listItemView.findViewById(R.id.mySacItemLinearLyout);
-        if (demande.getPaiement() >= (demande.getQte() * article.getPrix())) {
+        if (demande.getPaiement() >= (demande.getQte() * demande.getPrix())) {
             mySacItemLinearLyout.setBackgroundColor(Color.argb(50, 0, 100, 0));
+        }else{
+            mySacItemLinearLyout.setBackgroundColor(Color.rgb(250, 250, 250));
         }
 
 
@@ -124,23 +126,27 @@ public class DemandeAdapter extends ArrayAdapter<Demande> {
                 mContext.startActivity(intent);
             }
         });
-        boolean isLivre = database.isLivre(demande.getId());
+       final  boolean isLivre = database.isLivre(demande.getId());
 
         list_item_livre_Checkbox.setChecked(isLivre);
 
-        list_item_livre_Checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        list_item_livre_Checkbox.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                    boolean update = database.toggleLivre(demande.getId(), isChecked);
-
-                    if(!update){
-                        list_item_livre_Checkbox.setChecked(!isChecked);
-                    }else{
-                        Toast.makeText(mContext, "Error " + update, Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                boolean isChecked = !database.isLivre(demande.getId());
+                list_item_livre_Checkbox.setChecked(isChecked);
+                boolean update = database.toggleLivre(demande.getId(),isChecked);
+                if(update){
+                    if(isChecked){
+                        Toast.makeText(mContext, "Livré", Toast.LENGTH_SHORT).show();
                     }
+
+                }
             }
         });
+
+
         return listItemView;
     }
 }

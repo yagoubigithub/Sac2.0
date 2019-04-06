@@ -37,6 +37,8 @@ public class Database extends SQLiteOpenHelper {
 
         db.execSQL("create table  images (id INTEGER PRIMARY KEY AUTOINCREMENT , id_article INTEGER," +
                 "filename TEXT )");
+
+        db.execSQL("create table  temps (id INTEGER PRIMARY KEY AUTOINCREMENT , tempText TEXT)" );
     }
 
     @Override
@@ -389,4 +391,46 @@ public class Database extends SQLiteOpenHelper {
 
 
     }
+
+    public boolean setArticleIdInTemps(int article_id) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("tempText", article_id);
+
+
+
+        long result = db.insert("temps", null, contentValues);
+
+        return result != -1;
+    }
+
+
+    public ArrayList<String> getArticlesIdInTemps() {
+
+
+        SQLiteDatabase db = this.getWritableDatabase();
+       ArrayList arrayList  = new ArrayList();
+        Cursor res = db.rawQuery("SELECT * FROM temps " , null);
+        while (res.moveToNext()) {
+
+            arrayList.add(res.getString(1));
+
+        }
+
+        return arrayList;
+
+    }
+
+    public boolean deleteArticlesIdInTemps() {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+     return   db.delete("temps", null, null) > 0;
+
+
+    }
+
+
+
 }

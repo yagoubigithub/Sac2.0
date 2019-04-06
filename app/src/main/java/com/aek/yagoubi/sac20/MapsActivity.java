@@ -51,8 +51,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
             mMap.setMyLocationEnabled(true);
             mMap.setMyLocationEnabled(true);
-            mMap.setTrafficEnabled(true);
-            mMap.getUiSettings().setMyLocationButtonEnabled(false);
+
+            mMap.getUiSettings().setMyLocationButtonEnabled(true);
             getDeviceLocation();
 
             mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -111,7 +111,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Manifest.permission.ACCESS_COARSE_LOCATION};
 
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(), FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "getLocationPermission :" + FINE_LOCATION, Toast.LENGTH_LONG).show();
+
             if (ContextCompat.checkSelfPermission(this.getApplicationContext(), COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 mLocationPermissionGranted = true;
                 initMap();
@@ -126,7 +126,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void getDeviceLocation(){
-        Toast.makeText(this, "getDeviceLocation", Toast.LENGTH_LONG).show();
+
+
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         try {
             if(mLocationPermissionGranted){
@@ -138,12 +139,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         if(task.isSuccessful()){
                             Log.d("onComplete","Location success");
                             Location currentLocation = (Location)task.getResult();
+                            if(currentLocation != null)
 
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
                                     DEFAULT_ZOOM);
+                            else
+                                Toast.makeText(MapsActivity.this, "enable location to get current location", Toast.LENGTH_LONG).show();
+
                         }else{
                             Log.d("onComplete","location is null");
-                            Toast.makeText(MapsActivity.this, "unable to get current location", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MapsActivity.this, "enable location to get current location", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

@@ -12,12 +12,14 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.aek.yagoubi.sac20.Adapters.ArticleAdapter;
 import com.aek.yagoubi.sac20.Adapters.SelectArticleAdapter;
 import com.aek.yagoubi.sac20.Object.Article;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class SelectFromListDesArticlesActivity extends AppCompatActivity {
     ListView list_view_articles_in_ListDesArticlesActivity;
@@ -26,7 +28,7 @@ public class SelectFromListDesArticlesActivity extends AppCompatActivity {
     Database database;
     CheckBox see_all_checkbox;
     EditText serch_input_list_des_articles;
-    FloatingActionButton showAjouterArticleBtn;
+    FloatingActionButton showAjouterArticleBtn,saveSelectBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class SelectFromListDesArticlesActivity extends AppCompatActivity {
 
         list_view_articles_in_ListDesArticlesActivity = (ListView) findViewById(R.id.list_view_articles_in_ListDesArticlesActivity);
         showAjouterArticleBtn = (FloatingActionButton) findViewById(R.id.showAjouterArticleBtn);
+        saveSelectBtn = (FloatingActionButton) findViewById(R.id.saveSelectBtn);
 
         adapter = new SelectArticleAdapter(this, articles);
 
@@ -97,6 +100,19 @@ public class SelectFromListDesArticlesActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        saveSelectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("article_id",1);
+               setResult( RESULT_OK,returnIntent);
+              finish();
+            }
+        });
+
+
+
 
     }
 

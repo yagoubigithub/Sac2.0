@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.aek.yagoubi.sac20.ArticleActivity;
+import com.aek.yagoubi.sac20.Database;
 import com.aek.yagoubi.sac20.Object.Article;
 import com.aek.yagoubi.sac20.R;
 import com.aek.yagoubi.sac20.getPictureActivity;
@@ -24,9 +25,14 @@ public class SelectArticleAdapter extends ArrayAdapter<Article> {
 
     Context myContext;
 
+    Database database;
+
     public SelectArticleAdapter(Context context, ArrayList<Article> articles) {
         super(context, 0, articles);
         this.myContext =context;
+
+        database = new Database(context);
+
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -67,9 +73,13 @@ public class SelectArticleAdapter extends ArrayAdapter<Article> {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     Intent returnIntent = new Intent();
+                    //ajouter temp_articles_id
+                    database.setArticleIdInTemps(article.getId());
+
+/*
                     returnIntent.putExtra("article_id",article.getId());
                     ((AppCompatActivity)  myContext).setResult( ((AppCompatActivity)  myContext).RESULT_OK,returnIntent);
-                    ((AppCompatActivity)  myContext).finish();
+                    ((AppCompatActivity)  myContext).finish();*/
                 }
             }
         });

@@ -21,6 +21,7 @@ public class AjouterArticleActivity extends AppCompatActivity {
 
     ImageButton btn_ajouter_images_articles;
     ArrayList<String> fileNamesArrayList ;
+    Button btnCodeBare;
 Database database;
 
     EditText input_article_prix,input_article_name,input_article_type;
@@ -84,6 +85,17 @@ Database database;
 
 
 
+            }
+        });
+
+
+        btnCodeBare =(Button) findViewById(R.id.btnCodeBare);
+
+        btnCodeBare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentIntegrator scanIntegrator = new IntentIntegrator(AjouterArticleActivity.this);
+                scanIntegrator.initiateScan();
             }
         });
     }

@@ -222,17 +222,7 @@ public class ClientActivity extends AppCompatActivity {
             public void onClick(View v) {
                  isSave =  saveTheChange(client_id);
                 if (isSave) {
-                    //refresh
-                    //refresh
-                    if (android.os.Build.VERSION.SDK_INT >= 11) {
-
-                        recreate();
-
-                    } else {
-                        finish();
-                    }
-
-
+                    finish();
 
                 } else {
                     Toast.makeText(ClientActivity.this, "Error", Toast.LENGTH_LONG).show();

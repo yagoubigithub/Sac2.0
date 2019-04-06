@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.aek.yagoubi.sac20.Object.Article;
 import com.aek.yagoubi.sac20.Object.Client;
 
+import java.util.ArrayList;
+
 public class AjouterDemandeActivity extends AppCompatActivity {
 
 
@@ -30,6 +32,7 @@ public class AjouterDemandeActivity extends AppCompatActivity {
     CheckBox pyeeCheckbox;
     int qte = 1;
 
+    ArrayList<Article> articles;
     boolean isPayee = false;
 
     int id_client, id_client_finale, id_article;
@@ -41,6 +44,7 @@ public class AjouterDemandeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajouter_demande);
 
+        articles= new ArrayList<>();
 
         database = new Database(this);
         select_article_btn = (Button) findViewById(R.id.select_article_btn);
@@ -206,13 +210,35 @@ public class AjouterDemandeActivity extends AppCompatActivity {
         if (requestCode == 456) {
 
             try {
+                ArrayList<String> article_ids = database.getArticlesIdInTemps();
+
+                if(article_ids.size() > 0){
+                    Toast.makeText(this, ".." + article_ids.size(), Toast.LENGTH_SHORT).show();
+                    boolean delteTemps = database.deleteArticlesIdInTemps();
+                    if(delteTemps){
+                        article_name_text_view.setText("");
+                      for (int i = 0; i < article_ids.size();i++){
+                          try {
+                              int article_id = Integer.parseInt(article_ids.get(i));
+                              Article article = database.getArticle(article_id);
+                              articles.add(article);
+                              article_name_text_view.setText(article_name_text_view.getText().toString() +  " " +
+                                      article.getName());
+
+                          }catch (NumberFormatException ex){
+                              Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+                          }
+
+                      }
+                    }
+                }
                 int article_id = data.getIntExtra("article_id", -1);
 
                 article = database.getArticle(article_id);
                 id_article = article_id;
 
                 if (article != null) {
-                    article_name_text_view.setText(article.getName());
+                   // article_name_text_view.setText(article.getName());
                 }
             } catch (Exception e) {
                 e.printStackTrace();

@@ -46,8 +46,11 @@ public View getView(int position, View convertView, ViewGroup parent) {
         try {
         File f = new File(Environment.getExternalStorageDirectory()
         + "/dir",imgPath);
-        Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-        imageView.setImageBitmap(b);
+        if(f != null){
+                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                imageView.setImageBitmap(b);
+        }
+
         } catch (FileNotFoundException e) {
 
         e.printStackTrace();

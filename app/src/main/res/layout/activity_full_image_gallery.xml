@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#111"
     tools:context=".FullImageGalleryActivity">
 
     <ImageView
         android:id="@+id/imageFullScreen"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_launcher_background"/>
+        android:layout_height="wrap_content"
+
+        android:rotation="90"
+        android:src="@drawable/common_google_signin_btn_icon_dark"/>
 
 </LinearLayout>
