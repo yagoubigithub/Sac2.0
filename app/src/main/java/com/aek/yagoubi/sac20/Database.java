@@ -10,6 +10,7 @@ import android.os.Environment;
 import com.aek.yagoubi.sac20.Object.Article;
 import com.aek.yagoubi.sac20.Object.Client;
 import com.aek.yagoubi.sac20.Object.Demande;
+import com.aek.yagoubi.sac20.Object.Sac;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -31,9 +32,16 @@ public class Database extends SQLiteOpenHelper {
                 "name TEXT ,type TEXT, codebare TEXT ,codeBareFormat TEXT, prix INTEGER)");
 
 
-        db.execSQL("create table  demande (ID INTEGER PRIMARY KEY AUTOINCREMENT , " +
-                "id_client INTEGER,id_client_final INTEGER, id_article INTEGER  , description TEXT,  qte INTEGER, Paiement INTEGER,livre INTEGER)");
+        //demandee
 
+        db.execSQL("create table  demande (ID INTEGER PRIMARY KEY AUTOINCREMENT ,id_client INTEGER, " +
+                "id_client_final INTEGER , description TEXT, " +
+                "  Paiement INTEGER,livre INTEGER,date TEXT)");
+
+
+
+        db.execSQL("create table  sac (id INTEGER PRIMARY KEY AUTOINCREMENT , id_demande INTEGER," +
+                "id_article INTEGER, qte INTEGER )");
 
         db.execSQL("create table  images (id INTEGER PRIMARY KEY AUTOINCREMENT , id_article INTEGER," +
                 "filename TEXT )");
@@ -238,7 +246,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
 
-    public boolean AjouterDemande(int id_client, int id_client_finale, int id_article, String description, int qte, int paiement_int) {
+    public boolean AjouterDemande(int id_client, int id_client_finale, int id_article, String description, int qte, int paiement_int, String date, String  article_ids) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -249,6 +257,8 @@ public class Database extends SQLiteOpenHelper {
         contentValues.put("qte", qte);
         contentValues.put("Paiement", paiement_int);
         contentValues.put("livre", 0);
+        contentValues.put("date", date);
+        contentValues.put("article_ids", article_ids);
 
 
         long result = db.insert("demande", null, contentValues);
@@ -260,19 +270,26 @@ public class Database extends SQLiteOpenHelper {
 
 
     public ArrayList<Demande> getAllExtraDeamdes() {
-        SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<Demande> demandes = new ArrayList<>();
-        Cursor res = db.rawQuery("SELECT demande.id,demande.id_client,client.name as clinet_name, demande.id_client_final," +
-                " client.name as client_name_final,demande.id_article,article.name as article_name,demande.description," +
-                "demande.qte,demande.livre,demande.Paiement,article.prix,article.codebare,article.codeBareFormat  " +
-                "FROM demande JOIN article ON article.id = demande.id_article JOIN client ON client.id = demande.id_client", null);
+
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+
+        //D INTEGER PRIMARY KEY AUTOINCREMENT ,id_client INTEGER, " +
+        //                "id_client_final INTEGER , description TEXT, " +
+        //                "  Paiement INTEGER,livre INTEGER,date TEXT
+        Cursor res = db.rawQuery("SELECT * FROM demande", null);
         while (res.moveToNext()) {
-            demandes.add(new Demande(res.getInt(0),res.getInt(1),res.getString(2),
-                    res.getInt(3),
-                    res.getString(4),res.getInt(5), res.getString(6), res.getString(7),
-                    res.getInt(8),res.getInt(9),res.getInt(10),res.getInt(11),
-                    res.getString(12),
-                    res.getString(13)
+            demandes.add(new Demande(
+                    res.getInt(0),
+                    res.getInt(1),
+                    res.getInt(2),
+                    res.getString(3),
+                    res.getInt(4),
+                    res.getInt(5),
+                    res.getString(6)
+
 
             ));
 
@@ -284,11 +301,12 @@ public class Database extends SQLiteOpenHelper {
 
 
     public Demande getDemande(int id) {
-        SQLiteDatabase db = this.getWritableDatabase();
         Demande demande = null;
+      /*  SQLiteDatabase db = this.getWritableDatabase();
+
         Cursor res = db.rawQuery("SELECT demande.id,demande.id_client,client.name as clinet_name, demande.id_client_final," +
                 " client.name as client_name_final,demande.id_article,article.name as article_name,demande.description," +
-                "demande.qte,demande.livre,demande.Paiement,article.prix,article.codebare,article.codeBareFormat  " +
+                "demande.qte,demande.livre,demande.Paiement,article.prix,article.codebare,article.codeBareFormat ,demande.date,demande.article_ids " +
                 "FROM demande " +
                 "JOIN article ON article.id = demande.id_article JOIN client ON client.id = demande.id_client WHERE demande.id="+id, null);
         while (res.moveToNext()) {
@@ -297,12 +315,14 @@ public class Database extends SQLiteOpenHelper {
                     res.getString(4),res.getInt(5), res.getString(6), res.getString(7),
                     res.getInt(8),res.getInt(9),res.getInt(10),res.getInt(11),
                     res.getString(12),
-                    res.getString(13)
+                    res.getString(13),
+                   res.getString(14),
+                   res.getString(15)
 
             );
 
 
-        }
+        }*/
         return demande;
     }
 
@@ -362,19 +382,26 @@ public class Database extends SQLiteOpenHelper {
 
 
     public ArrayList<Demande> getAllExtraDeamdesByClientId(int client_id) {
-        SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<Demande> demandes = new ArrayList<>();
-        Cursor res = db.rawQuery("SELECT demande.id,demande.id_client,client.name as clinet_name, demande.id_client_final," +
-                " client.name as client_name_final,demande.id_article,article.name as article_name,demande.description," +
-                "demande.qte,demande.livre,demande.Paiement,article.prix,article.codebare,article.codeBareFormat  " +
-                "FROM demande JOIN article ON article.id = demande.id_article JOIN client ON client.id = demande.id_client WHERE client.id="+client_id + " OR demande.id_client_final="+client_id, null);
+
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+
+        //D INTEGER PRIMARY KEY AUTOINCREMENT ,id_client INTEGER, " +
+        //                "id_client_final INTEGER , description TEXT, " +
+        //                "  Paiement INTEGER,livre INTEGER,date TEXT
+        Cursor res = db.rawQuery("SELECT * FROM demande WHERE id_client=" + client_id, null);
         while (res.moveToNext()) {
-            demandes.add(new Demande(res.getInt(0),res.getInt(1),res.getString(2),
-                    res.getInt(3),
-                    res.getString(4),res.getInt(5), res.getString(6), res.getString(7),
-                    res.getInt(8),res.getInt(9),res.getInt(10),res.getInt(11),
-                    res.getString(12),
-                    res.getString(13)
+            demandes.add(new Demande(
+                    res.getInt(0),
+                    res.getInt(1),
+                    res.getInt(2),
+                    res.getString(3),
+                    res.getInt(4),
+                    res.getInt(5),
+                    res.getString(6)
+
 
             ));
 
@@ -414,23 +441,77 @@ public class Database extends SQLiteOpenHelper {
        ArrayList arrayList  = new ArrayList();
         Cursor res = db.rawQuery("SELECT * FROM temps " , null);
         while (res.moveToNext()) {
-
             arrayList.add(res.getString(1));
-
         }
-
         return arrayList;
-
     }
 
     public boolean deleteArticlesIdInTemps() {
-
         SQLiteDatabase db = this.getWritableDatabase();
-     return   db.delete("temps", null, null) > 0;
-
-
+        return   db.delete("temps", null, null) > 0;
     }
 
 
+    public boolean AjouterDemande2(int id_client, int id_client_final, ArrayList<Sac> sacs, String description, int paiement_int,
+                                   String date) {
 
+
+        //,id_client INTEGER, " +
+        //                "id_client_final INTEGER, description TEXT, " +
+        //                " qte INTEGER, Paiement INTEGER,livre INTEGER,date TEXT
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("id_client", id_client);
+        contentValues.put("id_client_final", id_client_final);
+
+        contentValues.put("description", description);
+        contentValues.put("Paiement", paiement_int);
+        contentValues.put("livre", 0);
+        contentValues.put("date", date);
+
+
+        long result = db.insert("demande", null, contentValues);
+
+
+        //(id INTEGER PRIMARY KEY AUTOINCREMENT , id_demande INTEGER," +
+        //                "id_article INTEGER, qte INTEGER )");
+        if (result != -1) {
+            for (int i = 0; i < sacs.size(); i++) {
+                ContentValues newContent = new ContentValues();
+
+                newContent.put("id_demande", result);
+                newContent.put("id_article", sacs.get(i).getId_article());
+                newContent.put("qte", sacs.get(i).getQte());
+
+                db.insert("sac", null, newContent);
+            }
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public ArrayList<Sac> getSacs(int id) {
+        ArrayList<Sac> sacs = new ArrayList<>();
+
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+
+        Cursor res = db.rawQuery("SELECT * FROM sac  WHERE id_demande=" + id, null);
+        while (res.moveToNext()) {
+           sacs.add(new Sac(
+                   res.getInt(0),
+                   res.getInt(1),
+                   res.getInt(2),
+                   res.getInt(3)
+                   ));
+
+
+        }
+        return sacs;
+
+    }
 }

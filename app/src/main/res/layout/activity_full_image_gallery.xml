@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:rotation="90"
         android:src="@drawable/common_google_signin_btn_icon_dark"/>
 
 </LinearLayout>

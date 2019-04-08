@@ -120,84 +120,8 @@ public class ListDesDemandesActivity extends AppCompatActivity {
 
         //checkboxs
 
-        see_all_checkbox = (CheckBox) findViewById(R.id.see_all_checkbox);
-        see_livre_checkbox = (CheckBox) findViewById(R.id.see_livre_checkbox);
-        see_payee_checkbox = (CheckBox) findViewById(R.id.see_payee_checkbox);
-
-        see_all_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    see_all_checkbox.setChecked(true);
-                    see_livre_checkbox.setChecked(false);
-                    see_payee_checkbox.setChecked(false);
 
 
-                    seeAll();
-
-                }
-            }
-        });
-
-        see_livre_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    see_payee_checkbox.setChecked(false);
-                    see_livre_checkbox.setChecked(true);
-                    see_all_checkbox.setChecked(false);
-
-
-                    seeAll();
-                    ArrayList<Demande> newArraySearch = new ArrayList<>();
-                    newArraySearch.clear();
-                    for (Demande d : demandes) {
-                        if (d.getLivre() == 1) {
-
-
-                            newArraySearch.add(d);
-                        }
-                    }
-                    adapter = new DemandeAdapter(ListDesDemandesActivity.this, newArraySearch);
-                    adapter.notifyDataSetChanged();
-                    list_view_demandes.setAdapter(adapter);
-
-
-                } else {
-                    seeAll();
-                }
-            }
-        });
-
-        see_payee_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    see_payee_checkbox.setChecked(true);
-
-                    see_livre_checkbox.setChecked(false);
-                    see_all_checkbox.setChecked(false);
-
-
-                    ArrayList<Demande> newArraySearch = new ArrayList<>();
-                    newArraySearch.clear();
-                    for (Demande d : demandes) {
-
-                        if (d.getPaiement() >= (d.getPrix() * d.getQte())) {
-                            Log.d("LisDesDemandeActivity", d.getPaiement() + "===" + (d.getPrix() * d.getQte()));
-                            newArraySearch.add(d);
-                        }
-                    }
-                    adapter = new DemandeAdapter(ListDesDemandesActivity.this, newArraySearch);
-                    adapter.notifyDataSetChanged();
-                    list_view_demandes.setAdapter(adapter);
-
-
-                } else {
-                    seeAll();
-                }
-            }
-        });
 
         codeBareBtn = (Button) findViewById(R.id.codeBareBtn);
 
@@ -235,8 +159,7 @@ public class ListDesDemandesActivity extends AppCompatActivity {
         see_livre_checkbox.setChecked(false);
         see_all_checkbox.setChecked(false);
         see_payee_checkbox.setChecked(false);
-
-
+/*
         if (search_ariticle_name.equals("") && search_client_name.equals("")) {
             adapter = new DemandeAdapter(ListDesDemandesActivity.this, demandes);
         } else {
@@ -255,7 +178,7 @@ public class ListDesDemandesActivity extends AppCompatActivity {
         }
         adapter.notifyDataSetChanged();
         list_view_demandes.setAdapter(adapter);
-
+*/
 
     }
 

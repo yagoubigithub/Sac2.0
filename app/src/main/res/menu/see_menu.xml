@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/see_pyee"
+        android:title="Pyeé"></item>
+
+    <item android:id="@+id/see_non_pyee"
+        android:title="Non pyeé"></item>
+
+    <item android:id="@+id/see_lvre"
+        android:title="livré"></item>
+
+
+    <item android:id="@+id/see_non_livre"
+        android:title="non livré"></item>
+
+    <item android:id="@+id/see_all"
+        android:title="Tout"></item>
+</menu>

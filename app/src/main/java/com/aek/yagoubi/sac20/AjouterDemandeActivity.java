@@ -18,6 +18,7 @@ import com.aek.yagoubi.sac20.Object.Article;
 import com.aek.yagoubi.sac20.Object.Client;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AjouterDemandeActivity extends AppCompatActivity {
 
@@ -31,8 +32,9 @@ public class AjouterDemandeActivity extends AppCompatActivity {
     ImageView add_qte_imageView, remove_qte_imageView;
     CheckBox pyeeCheckbox;
     int qte = 1;
-
+    String article_ids_text;
     ArrayList<Article> articles;
+
     boolean isPayee = false;
 
     int id_client, id_client_finale, id_article;
@@ -165,17 +167,26 @@ public class AjouterDemandeActivity extends AppCompatActivity {
                     return;
                 }
 
+                Date date = new Date();
 
-                boolean isSave = database.AjouterDemande(id_client, id_client_finale, id_article, description, qte, paiement_int);
-                if (isSave) {
+                if(article_ids_text.length() > 0){
+                    boolean isSave = database.AjouterDemande(id_client, id_client_finale, id_article, description, qte, paiement_int, date.toString(),article_ids_text);
+                    if (isSave) {
 
-                    Toast.makeText(AjouterDemandeActivity
-                            .this, "Demande enregistré avec succès : " + paiement_int, Toast.LENGTH_LONG).show();
-                    finish();
-                } else {
-                    Toast.makeText(AjouterDemandeActivity
-                            .this, "Error", Toast.LENGTH_LONG).show();
+                        Toast.makeText(AjouterDemandeActivity
+                                .this, "Demande enregistré avec succès : " + paiement_int, Toast.LENGTH_LONG).show();
+                        finish();
+                    } else {
+                        Toast.makeText(AjouterDemandeActivity
+                                .this, "Error", Toast.LENGTH_LONG).show();
+                    }
+
+                }else{
+                    Toast.makeText(AjouterDemandeActivity.this, "Sélectonner un Article svp", Toast.LENGTH_LONG).show();
+                    return;
                 }
+
+
 
             }
         });
@@ -221,6 +232,7 @@ public class AjouterDemandeActivity extends AppCompatActivity {
                           try {
                               int article_id = Integer.parseInt(article_ids.get(i));
                               Article article = database.getArticle(article_id);
+                              article_ids_text += "," +  article_id;
                               articles.add(article);
                               article_name_text_view.setText(article_name_text_view.getText().toString() +  " " +
                                       article.getName());

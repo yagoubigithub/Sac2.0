@@ -48,27 +48,7 @@
                         />
 
                 </LinearLayout>
-                <CheckBox
-                    android:id="@+id/see_payee_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Payée"
-                    android:textColor="#FFF"
-                    />
-                <CheckBox
-                    android:id="@+id/see_livre_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Livré"
-                    android:textColor="#FFF"
-                    />
-                <CheckBox
-                    android:id="@+id/see_all_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Voir Tout"
-                    android:textColor="#FFF"
-                    />
+
 
             </LinearLayout>
             <EditText

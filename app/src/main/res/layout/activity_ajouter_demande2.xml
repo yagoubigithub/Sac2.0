@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="4dp"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical"
+        tools:context=".AjouterDemandeActivity">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/select_article_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:background="@color/colorPrimary"
+                android:textColor="#FFF"
+                android:padding="4dp"
+                android:textAllCaps="false"
+                android:text="Sélectionner un Article"/>
+
+
+        </LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    >
+    <LinearLayout
+        android:id="@+id/articles_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+    </LinearLayout>
+</ScrollView>
+
+</LinearLayout>
+
+        <EditText
+            android:id="@+id/editText_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#eee"
+            android:paddingBottom="26dp"
+            android:paddingLeft="4dp"
+            android:paddingTop="4dp"
+            android:layout_margin="4dp"
+            android:layout_marginBottom="8dp"
+
+            android:hint="Description"/>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="Paiement"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/editText_paiement"
+                android:layout_width="285dp"
+                android:layout_height="wrap_content"
+                android:background="#eee"
+                android:padding="4dp"
+                android:text="0"
+                android:layout_margin="4dp"/>
+            <CheckBox
+                android:id="@+id/pyeeCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pyeé"/>
+        </LinearLayout>
+
+
+        <TextView
+
+            android:id="@+id/client_tetxView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Client :  "
+            android:layout_gravity="left|center_vertical"
+            />
+
+        <Button
+            android:id="@+id/select_client_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@color/colorPrimary"
+            android:textColor="#FFF"
+            android:padding="4dp"
+            android:textAllCaps="false"
+            android:text="Sélectionner Client"/>
+
+        <!--  <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:layout_margin="5dp"
+              >
+
+
+              <AutoCompleteTextView
+
+                  android:id="@+id/edit_text_client_name"
+                  android:layout_width="200dp"
+                  android:layout_height="wrap_content"
+
+                  android:background="#eee"
+                  android:layout_marginLeft="8dp"
+                  android:padding="3dp"
+                  android:hint="Nom"/>
+              <ImageView
+                  android:id="@+id/show_all_client_btn"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:background="#333"
+                  android:src="@drawable/ic_arrow_drop_down_white_24dp"
+                  android:padding="4dp"/>
+          </LinearLayout>
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+
+
+              android:orientation="horizontal"
+              android:layout_margin="5dp"
+              >
+
+
+
+              <EditText
+
+                  android:id="@+id/edit_text_client_tele"
+                  android:layout_width="230dp"
+                  android:hint="06 99 99 99"
+                  android:layout_marginLeft="5dp"
+                  android:layout_height="wrap_content"
+
+                  android:background="#eee"
+                  android:padding="3dp"
+                  android:inputType="number"
+                  android:layout_gravity="center"/>
+
+          </LinearLayout>
+  -->
+        <TextView
+
+
+            android:id="@+id/client_finale_textView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Client finale :"
+            android:layout_gravity="left|center_vertical"
+            />
+
+        <Button
+            android:id="@+id/select_client_finale_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@color/colorPrimary"
+            android:textColor="#FFF"
+            android:padding="4dp"
+            android:textAllCaps="false"
+            android:text="Sélectionner Client finale"/>
+        <!--   <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_margin="5dp"
+               >
+
+
+               <AutoCompleteTextView
+
+                   android:id="@+id/edit_text_client_name_final"
+                   android:layout_width="200dp"
+                   android:layout_height="wrap_content"
+
+                   android:background="#eee"
+                   android:layout_marginLeft="8dp"
+                   android:padding="3dp"
+                   android:hint="Nom"/>
+               <ImageView
+                   android:id="@+id/show_all_client_final_btn"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:background="#333"
+                   android:src="@drawable/ic_arrow_drop_down_white_24dp"
+                   android:padding="4dp"/>
+           </LinearLayout>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_margin="5dp">
+
+               <EditText
+                   android:id="@+id/edit_text_client_tele_final"
+                   android:layout_width="230dp"
+                   android:hint="06 99 99 99"
+                   android:layout_marginLeft="5dp"
+                   android:layout_height="wrap_content"
+                   android:background="#eee"
+                   android:padding="3dp"
+                   android:inputType="number"
+                   android:layout_gravity="center"/>
+
+           </LinearLayout>
+
+           -->
+        <Button
+            android:id="@+id/btnAjouterDemande"
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ajouter"
+            android:textAllCaps="false"
+            android:background="@color/design_default_color_primary"
+            android:textColor="#FFF"/>
+    </LinearLayout>
+</ScrollView>

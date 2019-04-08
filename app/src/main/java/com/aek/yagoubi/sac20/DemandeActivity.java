@@ -217,8 +217,9 @@ public class DemandeActivity extends AppCompatActivity {
             finish();
         }
         demande = database.getDemande(demande_id);
-
+/*
         if (demande != null) {
+
             article = database.getArticle(demande.getId_article());
             client = database.getClient(demande.getId_client());
             client_final = database.getClient(demande.getId_client_final());
@@ -249,7 +250,7 @@ public class DemandeActivity extends AppCompatActivity {
             finish();
         }
 
-
+*/
         delete_demande_btn = (ImageButton) findViewById(R.id.delete_demande_btn);
 
         delete_demande_btn.setOnClickListener(new View.OnClickListener() {

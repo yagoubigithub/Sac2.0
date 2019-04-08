@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         ajouter_demandes_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,AjouterDemandeActivity.class);
+                Intent intent = new Intent(MainActivity.this,AjouterDemandeActivity2.class);
                 startActivity(intent);
             }
         });
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         btn_list_des_demandes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,ListDesDemandesActivity.class);
+                Intent intent = new Intent(MainActivity.this,ListDesDemandesActivity2.class);
                 startActivity(intent);
             }
         });

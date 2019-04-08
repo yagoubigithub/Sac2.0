@@ -25,35 +25,30 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    android:id="@+id/list_item_demande_article_nom"
+                    android:id="@+id/list_item_demande_nom_client_nom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Article"
+                    android:text="Client :"
                   android:textSize="24sp"
                     android:textStyle="bold"
                     android:textColor="#55F"
                     android:padding="8dp"
                     />
-
                 <TextView
-
-                    android:id="@+id/list_item_demande_nom_client"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:text="Client  : ,,,,"
-
-
-                    />
-                <TextView
-
                     android:id="@+id/list_item_demande_nom_client_final"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:text="Client finale  : ,,,"
-
+                    android:text="Client final :"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#55F"
+                    android:padding="8dp"
                     />
+
+
+
+
+
 
 
             </LinearLayout>
@@ -75,17 +70,7 @@
         </LinearLayout>
 
 
-        <com.github.aakira.expandablelayout.ExpandableLinearLayout
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:orientation="vertical"
-            android:id="@+id/content"
-
-            app:ael_duration="100"
-            app:ael_orientation="vertical"
-            >
             <LinearLayout
 
                 android:layout_width="match_parent"
@@ -105,30 +90,15 @@
 
 
 
-                    <TextView
-
-                        android:id="@+id/list_item_demande_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Type  : Pc"
-
-                        />
-                    <TextView
-
-                        android:id="@+id/list_item_demande_prix"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Prix  : 50 $"
-
-                        />
-                    <TextView
-                        android:id="@+id/list_item_demande_qte"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Quantité : 2"
-                        />
+                  <LinearLayout
+                      android:id="@+id/sac_container"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
 
 
+
+                  </LinearLayout>
 
 
                     <TextView
@@ -186,16 +156,9 @@
                 </LinearLayout>
             </LinearLayout>
 
-        </com.github.aakira.expandablelayout.ExpandableLinearLayout>
 
-        <ImageView
-            android:id="@+id/showContentBtn"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:clickable="true"
-            android:layout_gravity="center_horizontal"
-            android:background="#E2E2E2"
-            android:src="@drawable/ic_arrow_up_black"/>
+
+
     </LinearLayout>
 
 

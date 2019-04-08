@@ -10,7 +10,7 @@
         android:id="@+id/image_gallerie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:rotation="90"
+
         android:src="@drawable/ic_launcher_background"
         android:scaleType="fitXY"/>
 
