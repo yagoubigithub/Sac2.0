@@ -169,7 +169,7 @@ public class DemandeActivity extends AppCompatActivity {
                 Toast.makeText(DemandeActivity.this, "demande_id : " + demande_id + "id :" + id_client, Toast.LENGTH_LONG).show();
 
 
-                boolean isSave = database.UpdateDemande(demande_id,id_client, id_client_finale, id_article, description, qte, paiement_int);
+             /*   boolean isSave = database.UpdateDemande(demande_id,id_client, id_client_finale, id_article, description, qte, paiement_int);
                 if (isSave) {
 
                     Toast.makeText(DemandeActivity
@@ -178,7 +178,7 @@ public class DemandeActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(DemandeActivity
                             .this, "Error", Toast.LENGTH_LONG).show();
-                }
+                }*/
 
             }
         });

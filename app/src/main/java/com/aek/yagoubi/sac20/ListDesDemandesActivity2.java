@@ -347,4 +347,26 @@ public class ListDesDemandesActivity2 extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onStop() {
+        demandes = null;
+        adapter = null;
+        database = null;
+        super.onStop();
+    }
+
+    @Override
+    protected void onRestart() {
+        seeAll();
+        super.onRestart();
+    }
+
+    @Override
+    protected void onDestroy() {
+        demandes = null;
+        adapter = null;
+        database = null;
+        super.onDestroy();
+    }
 }

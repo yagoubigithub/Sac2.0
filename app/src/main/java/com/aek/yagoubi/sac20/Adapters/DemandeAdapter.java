@@ -1,5 +1,6 @@
 package com.aek.yagoubi.sac20.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.aek.yagoubi.sac20.ArticleActivity;
 import com.aek.yagoubi.sac20.Database;
 import com.aek.yagoubi.sac20.DemandeActivity;
+import com.aek.yagoubi.sac20.DemandeActivity2;
 import com.aek.yagoubi.sac20.Object.Article;
 import com.aek.yagoubi.sac20.Object.Client;
 import com.aek.yagoubi.sac20.Object.Demande;
@@ -140,12 +142,16 @@ public class DemandeAdapter extends ArrayAdapter<Demande> {
         mySacItemLinearLyout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                Intent intent = new Intent(mContext, DemandeActivity.class);
-                intent.putExtra("demande_id",demande.getId());
-                mContext.startActivity(intent);*/
 
-                Toast.makeText(mContext, "Update", Toast.LENGTH_SHORT).show();           }
+                Intent intent = new Intent(mContext, DemandeActivity2.class);
+                intent.putExtra("demande_id",demande.getId());
+                mContext.startActivity(intent);
+                ((Activity) mContext).finish();
+
+
+
+
+                    }
         });
 
 

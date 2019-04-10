@@ -89,6 +89,15 @@
         android:layout_marginTop="85dp"
         />
 
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/saveSelectBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:src="@drawable/ic_save_white"
+        android:layout_marginRight="15dp"
+        android:backgroundTint="@color/design_default_color_primary_dark"
+        android:layout_marginBottom="15dp"
+        />
 
 </FrameLayout>

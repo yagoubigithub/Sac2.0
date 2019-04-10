@@ -301,7 +301,7 @@ public class AjouterDemandeActivity2 extends AppCompatActivity {
 
 
 
-                Toast.makeText(AjouterDemandeActivity2.this, "remove " + sacs.size(), Toast.LENGTH_SHORT).show();
+
             }
         });
 

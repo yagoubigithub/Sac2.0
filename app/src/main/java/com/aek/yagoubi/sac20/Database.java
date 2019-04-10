@@ -302,27 +302,29 @@ public class Database extends SQLiteOpenHelper {
 
     public Demande getDemande(int id) {
         Demande demande = null;
-      /*  SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor res = db.rawQuery("SELECT demande.id,demande.id_client,client.name as clinet_name, demande.id_client_final," +
-                " client.name as client_name_final,demande.id_article,article.name as article_name,demande.description," +
-                "demande.qte,demande.livre,demande.Paiement,article.prix,article.codebare,article.codeBareFormat ,demande.date,demande.article_ids " +
-                "FROM demande " +
-                "JOIN article ON article.id = demande.id_article JOIN client ON client.id = demande.id_client WHERE demande.id="+id, null);
+        SQLiteDatabase db = this.getWritableDatabase();
+
+
+        //D INTEGER PRIMARY KEY AUTOINCREMENT ,id_client INTEGER, " +
+        //                "id_client_final INTEGER , description TEXT, " +
+        //                "  Paiement INTEGER,livre INTEGER,date TEXT
+        Cursor res = db.rawQuery("SELECT * FROM demande WHERE id="+id, null);
         while (res.moveToNext()) {
-           demande = new Demande(res.getInt(0),res.getInt(1),res.getString(2),
-                    res.getInt(3),
-                    res.getString(4),res.getInt(5), res.getString(6), res.getString(7),
-                    res.getInt(8),res.getInt(9),res.getInt(10),res.getInt(11),
-                    res.getString(12),
-                    res.getString(13),
-                   res.getString(14),
-                   res.getString(15)
+            demande = new Demande(
+                    res.getInt(0),
+                    res.getInt(1),
+                    res.getInt(2),
+                    res.getString(3),
+                    res.getInt(4),
+                    res.getInt(5),
+                    res.getString(6)
+
 
             );
 
 
-        }*/
+        }
         return demande;
     }
 
@@ -360,24 +362,7 @@ public class Database extends SQLiteOpenHelper {
 
     }
 
-    public boolean UpdateDemande(int id,int id_client, int id_client_finale, int id_article, String description, int qte, int paiement_int) {
 
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("id_client", id_client);
-        contentValues.put("id_client_final", id_client_finale);
-        contentValues.put("id_article", id_article);
-        contentValues.put("description", description);
-        contentValues.put("qte", qte);
-        contentValues.put("Paiement", paiement_int);
-        contentValues.put("livre", 0);
-
-
-        long result = db.update("demande",contentValues, "id=" + id,null );
-
-        return result != -1;
-    }
 
 
 
@@ -512,6 +497,51 @@ public class Database extends SQLiteOpenHelper {
 
         }
         return sacs;
+
+    }
+
+    public boolean  deleteSac(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete("sac", "id_demande=?", new String[]{String.valueOf(id)}) > 0;
+
+    }
+
+    public boolean updateDemande(int id , int id_client, int id_client_final, ArrayList<Sac> sacs, String description, int paiement_int) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        //ID INTEGER PRIMARY KEY AUTOINCREMENT ,id_client INTEGER, " +
+        //                "id_client_final INTEGER , description TEXT, " +
+        //                "  Paiement INTEGER,livre INTEGER,date TEXT)"
+
+
+        boolean delete = deleteSac(id);
+        if(delete){
+            cv.put("id_client", id_client);
+            cv.put("id_client_final", id_client_final);
+            cv.put("description", description);
+            cv.put("Paiement", paiement_int);
+           long result =  db.update("demande", cv, "id=" + id, null);
+
+            if (result != -1) {
+                for (int i = 0; i < sacs.size(); i++) {
+                    ContentValues newContent = new ContentValues();
+
+                    newContent.put("id_demande", result);
+                    newContent.put("id_article", sacs.get(i).getId_article());
+                    newContent.put("qte", sacs.get(i).getQte());
+
+                    db.insert("sac", null, newContent);
+                }
+                return true;
+            } else {
+                return false;
+            }
+        }else{
+            return false;
+        }
+
+
+
 
     }
 }

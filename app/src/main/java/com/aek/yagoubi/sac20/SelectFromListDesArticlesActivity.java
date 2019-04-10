@@ -33,7 +33,7 @@ public class SelectFromListDesArticlesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_des_articles);
+        setContentView(R.layout.activity_select_from_list_des_article);
 
 
         see_all_checkbox = (CheckBox) findViewById(R.id.see_all_checkbox);
